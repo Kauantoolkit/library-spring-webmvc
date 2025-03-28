@@ -57,11 +57,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+
 
 
 		<dependency>
@@ -86,10 +82,11 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.postgresql</groupId>
-				<artifactId>postgresql</artifactId>
-				<scope>Runtime</scope>
-			</dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.6.0</version>
+    <scope>runtime</scope> <!-- Corrected to lowercase -->
+</dependency>
 		</dependencies>
 	</dependencyManagement>
 
