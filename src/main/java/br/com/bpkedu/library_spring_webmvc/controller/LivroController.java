@@ -43,6 +43,15 @@ public class LivroController {
         return "livros/editar";
     }
 
+    @PostMapping("/editar/{id}")
+    public String atualizarLivro(@PathVariable Long id, @ModelAttribute Livro livro) {
+        livro.setId(id); // Garante que o ID do livro seja o mesmo da URL
+        livroService.salvar(livro); // Atualiza o livro no banco de dados
+        return "redirect:/livros/listar"; // Redireciona para a listagem de livros
+    }
+
+
+
     @GetMapping("/deletar/{id:\\d+}")
     public String deletarLivro(@PathVariable Long id) {
         livroService.deletar(id);
