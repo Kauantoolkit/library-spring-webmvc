@@ -57,11 +57,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+
 
 
 		<dependency>
@@ -85,6 +81,12 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.6.0</version>
+    <scope>runtime</scope> <!-- Corrected to lowercase -->
+</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -95,6 +97,22 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		  <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            <excludes>
+                <exclude>application.properties</exclude> <!-- Exclude from filtering -->
+            </excludes>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>false</filtering> <!-- Disable filtering for properties file -->
+            <includes>
+                <include>application.properties</include>
+            </includes>
+        </resource>
+    </resources>
 	</build>
 
 </project>
