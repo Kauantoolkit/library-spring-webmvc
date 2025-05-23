@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Empréstimos</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-green-600 mb-8">Empréstimos</h1>
+
+  <table class="w-full bg-white shadow-md rounded-lg">
+    <thead>
+    <tr>
+      <th class="py-2 px-4 bg-green-500 text-white">ID</th>
+      <th class="py-2 px-4 bg-green-500 text-white">Usuário</th>
+      <th class="py-2 px-4 bg-green-500 text-white">Livro</th>
+      <th class="py-2 px-4 bg-green-500 text-white">Data Empréstimo</th>
+      <th class="py-2 px-4 bg-green-500 text-white">Data Devolução</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emprestimo : ${emprestimos}">
+      <td class="py-2 px-4 border-b" th:text="${emprestimo.id}"></td>
+      <td class="py-2 px-4 border-b" th:text="${emprestimo.usuario.nome}"></td>
+      <td class="py-2 px-4 border-b" th:text="${emprestimo.livro.titulo}"></td>
+      <td class="py-2 px-4 border-b" th:text="${#dates.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy')}"></td>
+      <td class="py-2 px-4 border-b" th:text="${#dates.format(emprestimo.dataDevolucao, 'dd/MM/yyyy')}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a href="./novo" class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+    Novo Empréstimo
+  </a>
+</div>
+</body>
+</html>

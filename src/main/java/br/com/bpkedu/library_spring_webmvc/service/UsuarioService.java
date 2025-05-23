@@ -12,8 +12,14 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
+
+    public List<Usuario> listarTodos(){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios;
+    }
+
+    public Usuario salvar(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 
     public Usuario buscarPorId(Long id) {

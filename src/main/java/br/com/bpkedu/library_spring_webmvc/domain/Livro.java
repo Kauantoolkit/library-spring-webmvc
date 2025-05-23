@@ -9,6 +9,7 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
     private String autor;
     private Integer anoPublicacao;
@@ -74,5 +75,15 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
     }
 
-
+    @Override
+    public String toString() {
+        return "Livro{" +
+            "id=" + id +
+            ", titulo='" + titulo + '\'' +
+            ", autor='" + autor + '\'' +
+            ", anoPublicacao=" + anoPublicacao +
+            ", isbn='" + isbn + '\'' +
+            ", editora='" + editora + '\'' +
+            '}';
+    }
 }

@@ -10,23 +10,48 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "Nome é obrigatório")
     private String nome;
-
-    @NotBlank(message = "Email é obrigatório")
+    private String senha;
     private String email;
-
+    private String endereco;
     private String telefone;
 
-    // Construtores
-    public Usuario() {}
-
-    public Usuario(String nome, String email, String telefone) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public Long getId() {
+        return id;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+            "id=" + id +
+            ", nome='" + nome + '\'' +
+            ", senha='" + senha + '\'' +
+            ", email='" + email + '\'' +
+            ", endereco='" + endereco + '\'' +
+            ", telefone='" + telefone + '\'' +
+            '}';
+    }
+}
 
     // Getters e Setters
     public Long getId() { return id; }

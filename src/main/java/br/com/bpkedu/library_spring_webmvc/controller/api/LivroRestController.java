@@ -17,6 +17,9 @@ public class LivroRestController {
     @Autowired
     private LivroService livroService;
 
+//    public LivroRestController(LivroService livroService) {
+//        this.livroService = livroService;
+//    }
 
     @GetMapping("/getAll")
     public List<Livro> getAll(){
