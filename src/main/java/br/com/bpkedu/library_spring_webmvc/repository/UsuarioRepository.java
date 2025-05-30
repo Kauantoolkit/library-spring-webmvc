@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findByNome(String nome); // Exemplo de busca personalizada
-//public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-//}
+}
