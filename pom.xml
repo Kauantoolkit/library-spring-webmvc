@@ -32,6 +32,13 @@
 	</properties>
 	<dependencies>
 		<dependency>
+  <groupId>org.projectlombok</groupId>
+  <artifactId>lombok</artifactId>
+  <version>1.18.36</version>
+  <scope>provided</scope>
+</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -106,6 +113,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.10.1</version>
+  <configuration>
+    <!-- Usa o javac do JDK em fork, não o compilador incremental do IDE -->
+    <fork>true</fork>
+    <!-- Garante compatibilidade de bytecode com Java 17 -->
+    <release>17</release>
+    <!-- Processador de anotações (Lombok) -->
+    <annotationProcessorPaths>
+      <path>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.36</version>
+      </path>
+    </annotationProcessorPaths>
+    <compilerArgs>
+      <arg>-parameters</arg>
+    </compilerArgs>
+  </configuration>
+</plugin>
+
 		</plugins>
 		  <resources>
         <resource>
