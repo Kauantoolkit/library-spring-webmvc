@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Empréstimos</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Empréstimos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gray-100">
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold text-green-600 mb-8">Empréstimos</h1>
+    <h1 class="text-3xl font-bold text-green-600 mb-8">Empréstimos</h1>
 
-  <table class="w-full bg-white shadow-md rounded-lg">
-    <thead>
-    <tr>
-      <th class="py-2 px-4 bg-green-500 text-white">ID</th>
-      <th class="py-2 px-4 bg-green-500 text-white">Usuário</th>
-      <th class="py-2 px-4 bg-green-500 text-white">Livro</th>
-      <th class="py-2 px-4 bg-green-500 text-white">Data Empréstimo</th>
-      <th class="py-2 px-4 bg-green-500 text-white">Data Devolução</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="emprestimo : ${emprestimos}">
-      <td class="py-2 px-4 border-b" th:text="${emprestimo.id}"></td>
-      <td class="py-2 px-4 border-b" th:text="${emprestimo.usuario.nome}"></td>
-      <td class="py-2 px-4 border-b" th:text="${emprestimo.livro.titulo}"></td>
-      <td class="py-2 px-4 border-b" th:text="${#dates.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy')}"></td>
-      <td class="py-2 px-4 border-b" th:text="${#dates.format(emprestimo.dataDevolucao, 'dd/MM/yyyy')}"></td>
-    </tr>
-    </tbody>
-  </table>
+    <table class="w-full bg-white shadow-md rounded-lg">
+        <thead>
+        <tr>
+            <th class="py-2 px-4 bg-green-500 text-white">ID</th>
+            <th class="py-2 px-4 bg-green-500 text-white">Usuário</th>
+            <th class="py-2 px-4 bg-green-500 text-white">Livro</th>
+            <th class="py-2 px-4 bg-green-500 text-white">Data Empréstimo</th>
+            <th class="py-2 px-4 bg-green-500 text-white">Data Devolução</th>
+            <th class="py-2 px-4 bg-green-500 text-white">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="emprestimo : ${emprestimos}">
+            <td class="py-2 px-4 border-b text-center" th:text="${emprestimo.id}"></td>
+            <td class="py-2 px-4 border-b text-center" th:text="${emprestimo.usuario.nome}"></td>
+            <td class="py-2 px-4 border-b text-center" th:text="${emprestimo.livro.titulo}"></td>
+            <td class="py-2 px-4 border-b text-center" th:text="${#temporals.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy')}"></td>
+            <td class="py-2 px-4 border-b text-center" th:text="${#temporals.format(emprestimo.dataDevolucao, 'dd/MM/yyyy')}"></td>
+            <td class="py-2 px-4 border-b flex gap-2 text-center">
+                <form th:action="@{/emprestimos/devolver/{id}(id=${emprestimo.id})}" method="post" th:if="${emprestimo.dataDevolucao == null}">
+                    <button type="submit" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 text-center">Devolver</button>
+                </form>
+                <a th:href="@{/emprestimos/editar/{id}(id=${emprestimo.id})}" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-center">Editar</a>
+                <form th:action="@{/emprestimos/excluir/{id}(id=${emprestimo.id})}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+                    <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-center">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-  <a href="./novo" class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
-    Novo Empréstimo
-  </a>
+
+    <a href="./novo" class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Novo Empréstimo</a>
+    <a href="/" class="mt-4 inline-block bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Voltar</a>
 </div>
 </body>
 </html>

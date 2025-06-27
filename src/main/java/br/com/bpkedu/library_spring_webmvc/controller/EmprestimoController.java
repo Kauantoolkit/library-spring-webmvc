@@ -1,20 +1,26 @@
 package br.com.bpkedu.library_spring_webmvc.controller;
 
+import br.com.bpkedu.library_spring_webmvc.domain.Emprestimo;
 import br.com.bpkedu.library_spring_webmvc.dto.EmprestimoDTO;
 import br.com.bpkedu.library_spring_webmvc.service.EmprestimoService;
 import br.com.bpkedu.library_spring_webmvc.service.LivroService;
 import br.com.bpkedu.library_spring_webmvc.service.UsuarioService;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/emprestimos")
+@Data
 public class EmprestimoController {
 
     private final EmprestimoService emprestimoService;
     private final LivroService livroService;
     private final UsuarioService usuarioService;
+
+    private Emprestimo emprestimo;
 
     public EmprestimoController(EmprestimoService emprestimoService,
                                 LivroService livroService,
@@ -53,4 +59,38 @@ public class EmprestimoController {
         emprestimoService.devolver(id);
         return "redirect:/emprestimos/listar";
     }
+
+    // 5) Formulário de edição
+@GetMapping("/editar/{id}")
+public String formularioEditar(@PathVariable Long id, Model model) {
+    var emprestimo = emprestimoService.buscarPorId(id);
+    var emprestimoDTO = new EmprestimoDTO(emprestimo);
+    model.addAttribute("emprestimoDTO", emprestimoDTO);
+    model.addAttribute("livros", livroService.listarTodos());
+    model.addAttribute("usuarios", usuarioService.listarTodos());
+    return "emprestimos/editar";
+}
+
+@PostMapping("/editar/{id}")
+public String atualizarEmprestimo(@PathVariable Long id, @ModelAttribute EmprestimoDTO dto) {
+    var emprestimoExistente = emprestimoService.buscarPorId(id);
+    // Atualize os campos que podem ser editados
+    emprestimoExistente.setUsuario(usuarioService.buscarPorId(dto.getUsuarioId()));
+    emprestimoExistente.setLivro(livroService.buscarPorId(dto.getLivroId()));
+    // Se quiser, atualize outros campos também
+
+    emprestimoService.atualizar(emprestimoExistente);
+    return "redirect:/emprestimos/listar";
+}
+
+// 6) Excluir empréstimo
+@PostMapping("/excluir/{id}")
+public String excluirEmprestimo(@PathVariable Long id) {
+    emprestimoService.excluir(id);
+    return "redirect:/emprestimos/listar";
+}
+
+
+
+
 }

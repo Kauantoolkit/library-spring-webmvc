@@ -1,16 +1,111 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
     <title>Novo Usuário</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /* Reset básico */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f3f4f6; /* cinza claro */
+        margin: 0;
+        padding: 2rem 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+      }
+      .container {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3), 0 4px 6px -4px rgba(16, 185, 129, 0.2);
+        width: 100%;
+        max-width: 480px;
+      }
+      h1 {
+        color: #059669; /* verde forte */
+        font-size: 1.875rem; /* 30px */
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        color: #065f46; /* verde escuro */
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+      input[type="text"],
+      input[type="email"] {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        border: 2px solid #10b981; /* verde */
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+        transition: border-color 0.3s ease;
+      }
+      input[type="text"]:focus,
+      input[type="email"]:focus {
+        outline: none;
+        border-color: #047857; /* verde mais escuro no foco */
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.3);
+      }
+      button[type="submit"] {
+        background-color: #10b981; /* verde */
+        color: white;
+        font-weight: 700;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.75rem;
+        width: 100%;
+        font-size: 1.125rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      button[type="submit"]:hover {
+        background-color: #059669; /* verde mais escuro */
+      }
+      a.cancel-link {
+        display: inline-block;
+        margin-top: 1rem;
+        text-align: center;
+        color: #10b981;
+        font-weight: 600;
+        text-decoration: none;
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease;
+      }
+      a.cancel-link:hover {
+        background-color: #d1fae5; /* verde claro */
+      }
+    </style>
 </head>
 <body>
+  <div class="container">
     <h1>Cadastrar Novo Usuário</h1>
     <form th:action="@{/usuarios/salvar}" th:object="${usuario}" method="post">
-        <label>Nome: <input type="text" th:field="*{nome}"></label><br>
-        <label>Email: <input type="email" th:field="*{email}"></label><br>
-        <label>Telefone: <input type="text" th:field="*{telefone}"></label><br>
-        <button type="submit">Salvar</button>
+      <label for="nome">Nome:</label>
+      <input id="nome" type="text" th:field="*{nome}" required>
+
+      <label for="email">Email:</label>
+      <input id="email" type="email" th:field="*{email}" required>
+
+      <label for="telefone">Telefone:</label>
+      <input id="telefone" type="text" th:field="*{telefone}" required>
+
+      <button type="submit">Salvar</button>
     </form>
-    <a th:href="@{/usuarios/listar}">Cancelar</a>
+    <a th:href="@{/usuarios/listar}" class="cancel-link">Cancelar</a>
+  </div>
 </body>
 </html>

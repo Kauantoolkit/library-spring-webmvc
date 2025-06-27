@@ -37,4 +37,15 @@ public class EmprestimoService {
         return emprestimoRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Empréstimo não encontrado: " + id));
     }
+
+    public Emprestimo atualizar(Emprestimo emprestimo) {
+    return emprestimoRepository.save(emprestimo);
+}
+
+public void excluir(Long id) {
+    Emprestimo emprestimo = buscarPorId(id);
+    emprestimoRepository.delete(emprestimo);
+}
+
+
 }

@@ -2,9 +2,11 @@ package br.com.bpkedu.library_spring_webmvc.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "usuarios")
+@Data
 public class Usuario {
 
     @Id
@@ -16,35 +18,11 @@ public class Usuario {
     private String endereco;
     private String telefone;
 
-    public Long getId() {
-        return id;
-    }
 
 
 
-    public String getNome() {
-        return nome;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
 
     @Override
     public String toString() {
